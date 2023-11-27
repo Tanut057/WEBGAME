@@ -138,19 +138,5 @@ margin-right: 150px; /* Adjust margins for smaller screens */
 white-space: nowrap;
 }
 
-.ContrainerGame {
-margin: 0 50px; /* Adjust margin for smaller screens */
-padding-bottom: 10px; /* Adjust padding for smaller screens */
-margin: 0 300px;
-}
 
-.PostPic {
-width: 90%; /* Adjust image width for smaller screens */
-max-width: 300px; /* Set a maximum width for the image */
-
-}
-
-.GameMenu {
-padding: 20px; /* Adjust padding for smaller screens */
-}
 }

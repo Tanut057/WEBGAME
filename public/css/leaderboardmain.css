@@ -141,3 +141,59 @@ hr{
     display: none;
     }
 
+    @media (max-width: 1200px) {
+        .item1 {
+          flex-direction: column;
+          align-items: center;
+        }
+      
+        .item1 #displayPic img {
+          width: 70px;
+          height: 70px;
+          border-radius: 40px;
+        }
+      
+        .item1 span {
+          padding: 10px 0;
+          font-size: 16px;
+        }
+      
+        .item1 nav ul {
+          flex-direction: column;
+          align-items: center;
+          margin-top: 20px;
+        }
+      
+        .item1 nav ul li {
+          margin: 10px 0;
+        }
+      
+        .item1 nav ul li:nth-child(1) {
+          margin-right: 0;
+        }
+      
+        .item1 nav ul li:nth-child(2) {
+          margin-right: 0;
+        }
+      
+        .item1 ul.dropdown {
+          width: 200px; /* Set the width of the dropdown */
+          position: absolute; /* Change the positioning */
+          top: 0; /* Position from the top */
+          left: 100%; /* Position from the right edge of the parent li */
+          white-space: normal; /* Allow the dropdown to wrap */
+          border-top: none; /* Optional: remove border at the top */
+        }
+      
+        .item1 ul.dropdown li a {
+          padding: 15px;
+          font-size: 16px;
+        }
+      
+        .item1 ul.dropdown li a:hover {
+          width: auto; /* Adjust width as needed */
+        }
+      }
+ 
+    
+    
