@@ -43,7 +43,7 @@ const con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "mydb",
+  database: "JJ",
 });
 
 con.connect((err) => {
@@ -63,16 +63,35 @@ const queryDB = (sql) => {
   });
 };
 
+
 //ทำให้สมบูรณ์
 app.post("/regisDB", async (req, res) => {
+/* add*/
+//must haved database ต้องมีดาต้าก่อนแล้วค่อยเปิดใช้
+// const username = req.body.username;
+// const usernameExists = await checkUsernameExists(username);
+//   if (usernameExists) {
+//     return res.redirect("/register.html?error=2");
+//   }
+/* add*/
+
   let now_date = new Date().toISOString().slice(0, 19).replace("T", " ");
   let sql =
     "CREATE TABLE IF NOT EXISTS userInfo (id INT AUTO_INCREMENT PRIMARY KEY, reg_date TIMESTAMP, username VARCHAR(255), email VARCHAR(100),password VARCHAR(100),img VARCHAR(100))";
   let result = await queryDB(sql);
   sql = `INSERT INTO userInfo (username, reg_date, email, password, img) VALUES ("${req.body.username}", "${now_date}","${req.body.email}", "${req.body.password}", "avatar.png")`;
   result = await queryDB(sql);
+ 
   return res.redirect("login.html");
 });
+
+/*add*/
+const checkUsernameExists = async (username) => {
+  let sql = `SELECT COUNT(*) AS count FROM userInfo WHERE username = '${username}'`;
+  let result = await queryDB(sql);
+  return result[0].count > 0;
+}; 
+/*add*/
 
 //ทำให้สมบูรณ์
 app.post("/profilepic", async (req, res) => {
@@ -92,7 +111,6 @@ app.post("/profilepic", async (req, res) => {
     updateImg(req.cookies.username, req.file.filename);
     res.cookie("img", req.file.filename);
     return res.redirect("GamePage.html");
-    //feed.html
   });
 });
 
@@ -112,26 +130,105 @@ app.get("/logout", (req, res) => {
 
 
 //ทำให้สมบูรณ์
-app.get("/readPost", async (req, res) => {
+app.post("/readComment", async (req, res) => {
   let sql =
-    "CREATE TABLE IF NOT EXISTS userPost (username VARCHAR(255), post VARCHAR(500))";
+    'CREATE TABLE IF NOT EXISTS' + ' ' + req.body.tablename + ' ' + '(username VARCHAR(500), comment_text VARCHAR(500))';
   let result = await queryDB(sql);
-  sql = `SELECT post, username FROM userPost`;
+  sql = `SELECT comment_text, username FROM ${req.body.tablename}`;
   result = await queryDB(sql);
   result = Object.assign({}, result);
-  console.log(result);
   res.json(result);
 });
 
-//ทำให้สมบูรณ์
-app.post("/writePost", async (req, res) => {
-    let sql =
-    "CREATE TABLE IF NOT EXISTS userPost (username VARCHAR(255), post VARCHAR(500))";
+app.post("/writeComment", async (req, res) => {
+  let sql =
+    'CREATE TABLE IF NOT EXISTS' + ' ' + req.body.tablename + ' ' + '(username VARCHAR(500), comment_text VARCHAR(500))';
   let result = await queryDB(sql);
-  sql = `INSERT INTO userPost (username,post) VALUES ("${req.body.user}", "${req.body.message}")`;
+  sql = `INSERT INTO ${req.body.tablename} (username,comment_text) VALUES ("${req.body.user}", "${req.body.message}")`;
   result = await queryDB(sql);
-  res.redirect("GamePage.html");
-  //feed.html
+  res.redirect("Index.html");
+});
+
+/*add*/
+app.post("/check-username", async (req, res) => {
+  const username = req.body.username;
+  const usernameExists = await checkUsernameExists(username);
+  res.json({ isUsernameTaken: usernameExists });
+});
+/*add*/
+
+app.post("/addLikeToUser", async (req, res) => {
+  let sql = `SELECT username, score, like_love FROM ${req.body.tablename} ORDER BY length(score) DESC, score DESC`;
+  let result = await queryDB(sql);
+  if (result.length == 2 && req.body.numberOfPos == 2) {
+    console.log("Dont have user");
+    res.end;
+    return;
+  }
+  else if (result.length == 1 && req.body.numberOfPos == 1) {
+    console.log("Dont have user");
+    res.end;
+    return;
+  }
+  else if (result.length == 0) {
+    console.log("Dont have user");
+    res.end;
+    return;
+  }
+
+  let userToUpdate = result[req.body.numberOfPos];
+
+  let updatedLikeLove = userToUpdate.like_love + req.body.numberOfLike;
+
+  sql = `UPDATE ${req.body.tablename} SET like_love = ${updatedLikeLove} WHERE username = '${userToUpdate.username}'`;
+  result = await queryDB(sql);
+  res.redirect("Index.html");
+});
+
+app.post("/readLeaderboardname", async (req, res) => {
+  let sql =
+    'CREATE TABLE IF NOT EXISTS' + ' ' + req.body.tablename + ' ' + '(username VARCHAR(500), score INT(10), like_love INT(100))';
+  let result = await queryDB(sql);
+  sql = `SELECT username, score, like_love FROM ${req.body.tablename} ORDER BY length(score) DESC,score DESC`;
+  result = await queryDB(sql);
+  result = Object.assign({}, result);
+  res.json(result);
+});
+
+app.post('/writeLeaderboardname', async (req, res) => {
+  console.log(req.body.tablename);
+  let createTableSQL =
+    'CREATE TABLE IF NOT EXISTS ' + req.body.tablename + ' (username VARCHAR(500), score INT(10), like_love INT(100))';
+  await queryDB(createTableSQL);
+
+  const { username, score } = req.body;
+
+  con.query('SELECT * FROM ' + req.body.tablename + ' WHERE username = ?', [username], (err, rows) => {
+    if (err) throw err;
+
+    if (rows.length > 0) {
+      con.query(
+        'UPDATE ' + req.body.tablename + ' SET score = ? WHERE username = ? AND score < ?',
+        [score, username, score],
+        (updateErr, updateResult) => {
+          if (updateErr) throw updateErr;
+
+          console.log("Score updated successfully");
+        }
+      );
+    } else {
+      if (username && score !== null && score !== undefined) {
+        let insertSQL = `INSERT INTO ${req.body.tablename} (username, score, like_love) VALUES (?, ?, 0)`;
+        con.query(insertSQL, [username, score], (insertErr, insertResult) => {
+          if (insertErr) throw insertErr;
+
+          console.log("New user added successfully");
+        });
+      } else {
+        console.log("Username or score is null");
+      }
+    }
+  });
 });
 
 //ทำให้สมบูรณ์
@@ -151,7 +248,6 @@ app.post("/checkLogin", async (req, res) => {
       res.cookie("img", result[keys[numberOfKeys]].img);
       IsCorrect = true;
       return res.redirect("GamePage.html");
-      //feed.html
     }
   }
   if (IsCorrect == false) {
@@ -159,10 +255,6 @@ app.post("/checkLogin", async (req, res) => {
     console.log("login failed");
     return res.redirect("login.html?error=1");
   }
-  // ถ้าเช็คแล้ว username และ password ถูกต้อง
-  // return res.redirect('feed.html');
-  // ถ้าเช็คแล้ว username และ password ไม่ถูกต้อง
-  // return res.redirect('login.html?error=1')
 });
 
 app.listen(port, hostname, () => {

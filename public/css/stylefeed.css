@@ -15,6 +15,7 @@
 }
 .grid-container .item1{
 	background-color: #24171A;
+	color: #fff;
   }
   .grid-container .item1 > span{
 	
@@ -70,7 +71,7 @@ hr {
    /* display: block;*/
     height: 1px;
     border: 0;
-    border-top: 10px solid #8de08c;
+    border-top: 10px solid rgb(12, 1, 4);
 	border-radius: 10px;
     margin: 15px 10px;
     padding: 0; 
