@@ -105,3 +105,6 @@ function showPost(data) {
     temp.appendChild(temp1);
   }
 }
+function Goback(){
+  window.open("http://localhost:5500/GamePage.html");
+}

@@ -1949,6 +1949,7 @@ body {
   background-color: #f7f7f7;
   color: #585858;
   font-size: 125%;
+  padding: 100px;
 }
 
 body.safe-browsing {
@@ -2559,7 +2560,15 @@ html[subframe] body {
 </script>
 <body class="bodyID123">
  
-  <div class="item2"> <a href="/logout"> <button>Logout</button></a> </div>
+  <div class="item2"> <a href="/logout"> <button>Logout</button></a> 
+    <button onclick="goBack()">Go Back</button>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+  </div>
 </body>
 <div id="main-frame-error" class="interstitial-wrapper" jstcache="0">
     <div class="onlyforchrome" style="font-size: 30px;text-align: center;font-family: Helvetica;">Running T-Rex</div>

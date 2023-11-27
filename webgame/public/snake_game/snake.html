@@ -12,7 +12,16 @@
 </head>
 <body>
     <body class="bodyID123">
-        <div class="item2"> <a href="/logout"> <button>Logout</button></a> </div>
+        <div class="item2"> <a href="/logout"> <button>Logout</button></a> 
+          <button onclick="goBack()">Go Back</button>
+
+          <script>
+              function goBack() {
+                  window.history.back();
+              }
+          </script>
+         
+        </div>
       </body>
   <canvas id="snakeCanvas" width="400" height="400"></canvas>
   <script>

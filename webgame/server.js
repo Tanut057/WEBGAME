@@ -91,7 +91,8 @@ app.post("/profilepic", async (req, res) => {
     }
     updateImg(req.cookies.username, req.file.filename);
     res.cookie("img", req.file.filename);
-    return res.redirect("feed.html");
+    return res.redirect("GamePage.html");
+    //feed.html
   });
 });
 
@@ -107,6 +108,7 @@ app.get("/logout", (req, res) => {
   res.clearCookie("img");
   return res.redirect("login.html");
 });
+
 
 
 //ทำให้สมบูรณ์
@@ -128,7 +130,8 @@ app.post("/writePost", async (req, res) => {
   let result = await queryDB(sql);
   sql = `INSERT INTO userPost (username,post) VALUES ("${req.body.user}", "${req.body.message}")`;
   result = await queryDB(sql);
-  res.redirect("feed.html");
+  res.redirect("GamePage.html");
+  //feed.html
 });
 
 //ทำให้สมบูรณ์
@@ -147,7 +150,8 @@ app.post("/checkLogin", async (req, res) => {
       res.cookie("username", result[keys[numberOfKeys]].username);
       res.cookie("img", result[keys[numberOfKeys]].img);
       IsCorrect = true;
-      return res.redirect("feed.html");
+      return res.redirect("GamePage.html");
+      //feed.html
     }
   }
   if (IsCorrect == false) {

@@ -13,7 +13,7 @@ body{
     align-items: center;
     min-height: 100vh;
     background-color: #42262f;
-    background-image: url(https://img.freepik.com/free-vector/pixel-art-vacation-background_52683-86708.jpg?w=1380&t=st=1700466826~exp=1700467426~hmac=74498a66686b775db996a9a88104398b8b1b553ffc944f4099af44d45b251a32);
+    background-image: url("../img/pixel-art-vacation-background_52683-86708.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
