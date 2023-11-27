@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link type="text/css" rel="stylesheet" href="css/stylefeed.css">
+    <link type="text/css" rel="stylesheet" href="css/trexleaderboard.css">
     <script type="text/javascript" src="js/Index.js"></script>
 </head>
 
@@ -19,27 +19,38 @@
 
     
 
-        <div class="item1">
+    <div class="item1">
 
-            <div id="browsePic">
-                <div id="displayPic">
-                    <img src="img/avatar.png" alt="">
-                </div>
-                <form action="/profilepic" method="post" id="formId" enctype="multipart/form-data">
-                    <input type="file" id="fileField" name="avatar" value="fileToUpload" placeholder="" hidden>
-                </form>
+        <div id="browsePic">
+            <div id="displayPic">
+                <img src="img/avatar.png" alt="">
             </div>
-
-            Hello <span id="username"></span> LEADER BOARD
-            <div><a href="/logout" id="LogoutButton">Logout</a>
-                <button onclick="goBack()">Go Back</button>
-               <script>
-                    function goBack() {
-                        window.history.back();
-                    }
-                </script>
-                 </div>
+            <form action="/profilepic" method="post" id="formId" enctype="multipart/form-data">
+                <input type="file" id="fileField" name="avatar" value="fileToUpload" placeholder="" hidden>
+            </form>
+           
         </div>
+
+          <span id="username"></span> 
+          <nav class="navbar">
+            <ul class="menu">
+                <li><a href="#">LEADERBOARD SNAKE-GAME</a></li>
+                <li class="menu-item"><a href="#">Setting</a>
+                <ul class="dropdown">
+                    <li><a href="#" onclick="goBack()">Goback</a>
+                        <script>
+                             function goBack() {
+                                 window.history.back();
+                             }
+                         </script>
+                    </li>
+                    <li><a href="/logout" id="LogoutButton">Logout</a></li>
+                </ul>
+                </li>
+                
+            </nav>
+            
+    </div>
     
     <div class="item2">
 
@@ -53,9 +64,9 @@
         </div> -->
         <div id="snakegameleaderboard_1">
             <h1>Number 1</h1>
-        </div><span><button id="snakegamecomment_1" onClick="useLikeButton('snakegameleaderboard', 0)">Like</button></span>
         <textarea name="msg" id="textmsg_1" value="" placeholder="" rows="4" cols="50"></textarea>
         <br>
+    </div><span><button id="snakegamecomment_1" onClick="useLikeButton('snakegameleaderboard', 0)">Like</button></span>
         <button id="snakegamecomment_1" onClick="getData(this.id, 'textmsg_1')">Post</button>
     </div>
     <hr>
@@ -66,9 +77,9 @@
     <div id="leader_Board_2">
         <div id="snakegameleaderboard_2">
             <h1>Number 2</h1>
-        </div><span><button id="snakegamecomment_2" onClick="useLikeButton('snakegameleaderboard', 1)">Like</button></span>
         <textarea name="msg" id="textmsg_2" value="" placeholder="" rows="4" cols="50"></textarea>
         <br>
+    </div><span><button id="snakegamecomment_2" onClick="useLikeButton('snakegameleaderboard', 1)">Like</button></span>
         <button id="snakegamecomment_2" onClick="getData(this.id, 'textmsg_2')">Post</button>
     </div>
     <hr>
@@ -79,9 +90,9 @@
     <div id="leader_Board_3">
         <div id="snakegameleaderboard_3">
             <h1>Number 3</h1>
-        </div><span><button id="snakegamecomment_3" onClick="useLikeButton('snakegameleaderboard', 2)">Like</button></span>
         <textarea name="msg" id="textmsg_3" value="" placeholder="" rows="4" cols="50"></textarea>
         <br>
+    </div><span><button id="snakegamecomment_3" onClick="useLikeButton('snakegameleaderboard', 2)">Like</button></span>
         <button id="snakegamecomment_3" onClick="getData(this.id, 'textmsg_3')">Post</button>
     </div>
     <hr>

@@ -1,0 +1,143 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+body{
+   background-image: url('../img/pixel-art-vacation-background_52683-86708.jpg');
+   background-size: cover;
+   background-attachment: fixed;
+   background-position:center;
+}
+.item1 {
+    background-color: #100E1B;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    justify-content: space-between;
+  }
+  
+  .item1 #displayPic img {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    box-shadow: 0 0 10px #fff;
+  }
+  
+  .item1 #displayPic img:hover {
+    cursor: pointer;
+  }
+  
+  .item1 span {
+    padding-right: 600px;
+    font-size: 18px;
+  }
+  
+  .item1 nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+  }
+  
+  .item1 nav ul li {
+    position: relative;
+    margin-right: 20px;
+    font-size: 20px;
+  }
+  
+  .item1 nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 25px;
+    display: block;
+  }
+  
+  .item1 nav ul li:hover > ul.dropdown {
+    display: block;
+  }
+  
+  .item1 ul.dropdown {
+    display: none;
+    position: absolute;
+    background-color: #100E1B;
+    padding: 0;
+    width: 200px;
+    white-space: nowrap;
+  }
+  
+  .item1 ul.dropdown li {
+    margin: 0;
+  }
+  
+  .item1 ul.dropdown li a {
+    padding: 15px;
+    padding-left: 30px;
+    display: block;
+    font-size: 18px;
+  }
+  
+  .item1 ul.dropdown li a:hover {
+    background-color: #181527;
+    width: 200px;
+  }
+  
+  .item1 nav ul li:nth-child(1) {
+    margin-right: 550px;
+    
+  }
+  
+  .item1 nav ul li:nth-child(2) {
+    margin-right: 100px;
+  }
+  
+  .item1 .ContrainerGame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #554777;
+    margin: 0 455px;
+    padding-bottom: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .item1 .GameMenu h1 {
+    color: aliceblue;
+   
+  }  
+  .item3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    color: white;
+    background-color: rgba(56, 45, 82, 0.9);
+    margin-left: 200px;
+    margin-right: 200px;
+    padding: 20px;
+  }
+hr{
+    width: 100%;
+        background-color: #fff; /* Change the color if necessary */
+}
+.item3 button {
+        margin-bottom: 10px;
+        padding: 8px 16px;
+        border: none;
+        background-color: #554777;
+        color: white;
+        cursor: pointer;
+}
+#IntroText{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+}
+/*Display off Scrollbar*/
+::-webkit-scrollbar{
+    display: none;
+    }
+
